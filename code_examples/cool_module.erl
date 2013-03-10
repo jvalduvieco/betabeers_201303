@@ -3,5 +3,5 @@
 -export([sum/2]).
 
 sum (Foo, Bar) ->
- Result = Foo + Bar,
- {ok, Result}.
+	Result = Foo + Bar,
+	{ok, Result}.

@@ -11,17 +11,17 @@
 
 %% ---- CLIENT code ------------------------------------------------------
 start_link() ->
-    gen_server:start_link({local, skvs}, skvs_server, [], []).
+	gen_server:start_link({local, skvs}, skvs_server, [], []).
 
 initialize() ->
 	% Create a new ETS table, called from supervisor
 	ets:new(data_store,[set, public, named_table, {write_concurrency, true}]).
 
 get(Key) ->
-    gen_server:call(skvs, {get, Key}).
+	gen_server:call(skvs, {get, Key}).
 
 set(Key,Value) ->
-    gen_server:call(skvs, {set, Key, Value}).
+	gen_server:call(skvs, {set, Key, Value}).
 
 set_fire_and_forget(Key,Value) ->
 	gen_server:cast(skvs, {set, Key, Value}).
@@ -32,7 +32,7 @@ crash() ->
 %% --- SERVER code -------------------------------------------------------
 %% gen_server behaviour interface
 init(_Args) ->
-    {ok,[]}.
+	{ok,[]}.
 terminate(_Reason, State) -> {ok,State}.
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
 handle_info( _, State) -> {noreply,State}.
@@ -49,7 +49,7 @@ handle_call({crash,Value}, _From, State) ->
 
 %% Async calls, do not expect response
 handle_cast({set, Key, Value}, State) ->
-    {noreply, set_value(Key,Value), State}.
+	{noreply, set_value(Key,Value), State}.
 
 %% Private functions
 set_value(Key, Value) ->
