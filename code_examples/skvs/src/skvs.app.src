@@ -1,0 +1,15 @@
+{application, skvs,
+  [
+    {description, ""},
+    {vsn, "1"},
+    {registered, []},
+    %{applications, [
+    %  kernel,
+    %  stdlib,
+    %  sasl,
+    %  lager
+    %]},
+    {mod, {skvs_app, []}},
+    {env, []},
+    {modules,[skvs_app, skvs_server, skvs_server_sup]}
+  ]}.
