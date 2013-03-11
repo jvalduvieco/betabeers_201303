@@ -12,23 +12,21 @@ Es recomendable tener instalado Erlang. En el siguiente enlace encontraréis tod
 Por favor, comprobad que funciona:
 Si escribís,
 
-`erl`
+    erl
 
 Deberíais ver algo parecido a:
 
-`Erlang R16B (erts-5.10.1) [source] [64-bit] [smp:2:2] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]`
-
-`Eshell V5.10.1  (abort with ^G)`
-
-`1> `
+    Erlang R16B (erts-5.10.1) [source] [64-bit] [smp:2:2] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
+    Eshell V5.10.1  (abort with ^G)
+    1> 
 
 Si escribís:
 
-`q().`
+    q().
 
 Deberíais ver:
 
-`ok`
+    ok
 
 Y el símbolo del sistema.
 
