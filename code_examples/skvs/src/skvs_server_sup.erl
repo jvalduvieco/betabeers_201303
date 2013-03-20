@@ -7,7 +7,7 @@
 start_link() ->
 	% Initialize ETS table and link to supervsor process, making resistant to gen_server crashes
 	skvs_server:initialize(),
-	supervisor:start_link(skvs_server_sup, []).
+	supervisor:start_link({local, skvs_server_sup}, skvs_server_sup, []).
 
 init(_Args) ->
 	{ok, {{one_for_one, 1, 60},

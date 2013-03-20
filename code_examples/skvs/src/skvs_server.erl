@@ -2,8 +2,8 @@
 -behaviour(gen_server).
 
 %% Client API
-%%  -export([start_link/0, set/2, set_fire_and_forget/2, get/1, list/0, initialize/0]).
--export([start_link/0, set/2, set_fire_and_forget/2, get/1, initialize/0]).
+%%-export([start_link/0, set/2, set_fire_and_forget/2, get/1, list/0, initialize/0]).
+ -export([start_link/0, set/2, set_fire_and_forget/2, get/1, initialize/0]).
 
 %% gen_server behaviour interfce
 -export([init/1, handle_call/3,handle_cast/2,terminate/2,code_change/3,handle_info/2, crash/0]).
@@ -27,9 +27,9 @@ set(Key,Value) ->
 set_fire_and_forget(Key,Value) ->
 	gen_server:cast({global,skvs}, {set, Key, Value}).
 
-%% list() ->
-%% 	Result = gen_server:call({global,skvs},{list}),
-%% 	io:format("~p ~n",[Result]).
+%%list() ->
+%%	Result = gen_server:call({global,skvs},{list}),
+%%	io:format("~p ~n",[Result]).
 
 crash() ->
 	gen_server:call(skvs, {crash, 4}).
@@ -49,14 +49,14 @@ handle_call({set, Key, Value}, _From, State) ->
 handle_call({get, Key}, _From, State) ->
 	{reply, get_value(Key), State};
 
-%% handle_call({list}, _From, State) ->
-%% 	Result = case ets:match(data_store,'$1') of
-%% 		[] ->
-%% 			{error,not_found};
-%% 		Results ->
-%% 			{ok,lists:flatten(Results)}
-%% 	end,
-%% 	{reply, Result, State};
+handle_call({list}, _From, State) ->
+	Result = case ets:match(data_store,'$1') of
+		[] ->
+			{error,not_found};
+		Results ->
+			{ok,lists:flatten(Results)}
+	end,
+{reply, Result, State};
 
 handle_call({crash,Value}, _From, State) ->
 	3 = Value,
@@ -64,7 +64,8 @@ handle_call({crash,Value}, _From, State) ->
 
 %% Async calls, do not expect response
 handle_cast({set, Key, Value}, State) ->
-	{noreply, set_value(Key,Value), State}.
+	set_value(Key,Value),
+	{noreply, State}.
 
 %% Private functions
 set_value(Key, Value) ->

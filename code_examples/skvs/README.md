@@ -29,3 +29,27 @@ Ofrece la funcionalidad del sistema. Está implementado mediante un gen_server. 
 * Los métodos del servidor. Son los métodos especificados en la behaviour `gen_server` y las callbacks que gestionan los mensajes del cliente.
 
 [Documentación sobre gen_server](http://www.erlang.org/doc/man/gen_server.html)
+
+## Poniéndolo en marcha
+Primero debemos situarnos en el directorio raiz del proyecto. Deberemos ver:
+
+    $ ls
+    README.md	ebin		rebar		rebar.config	src
+Ahora toca compilar:
+
+    ./rebar compile
+    
+Iniciar el nodo erlang:
+
+    erl -pa ebin
+
+Una vez en la consola de Erlang, iniciar la aplicacón:
+
+    application:start(skvs).
+
+Now you can issue commands:
+
+    skvs_server:set(popo,33).
+    skvs_server:get(popo).
+    …
+    
