@@ -32,7 +32,7 @@ set_fire_and_forget(Key,Value) ->
 %%	io:format("~p ~n",[Result]).
 
 crash() ->
-	gen_server:call(skvs, {crash, 4}).
+	gen_server:call({global,skvs}, {crash, 4}).
 
 %% --- SERVER code -------------------------------------------------------
 %% gen_server behaviour interface
